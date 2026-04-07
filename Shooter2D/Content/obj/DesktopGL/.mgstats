@@ -1,0 +1,4 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/maksr/Documents/C# progs/Monogame/Shooter2D/Shooter2D/Content/Sprites/dummy1.png","C:/Users/maksr/Documents/C# progs/Monogame/Shooter2D/Shooter2D/Content/bin/DesktopGL/Sprites/dummy1.xnb","TextureProcessor","Texture2DContent",462,25685,0,1477008
+"C:/Users/maksr/Documents/C# progs/Monogame/Shooter2D/Shooter2D/Content/Sprites/floor-dummy1.png","C:/Users/maksr/Documents/C# progs/Monogame/Shooter2D/Shooter2D/Content/bin/DesktopGL/Sprites/floor-dummy1.xnb","TextureProcessor","Texture2DContent",2555,409685,0,0231619
+"C:/Users/maksr/Documents/C# progs/Monogame/Shooter2D/Shooter2D/Content/Sprites/soldier_player_dummy.png","C:/Users/maksr/Documents/C# progs/Monogame/Shooter2D/Shooter2D/Content/bin/DesktopGL/Sprites/soldier_player_dummy.xnb","TextureProcessor","Texture2DContent",2552,640085,0,0193481
