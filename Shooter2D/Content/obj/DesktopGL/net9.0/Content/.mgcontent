@@ -5,10 +5,12 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/maksr/Documents/C# progs/Monogame/Shooter2D/Shooter2D/Content/Sprites/dummy1.png</File>
+    <File>C:/Users/maksr/Documents/C# progs/Monogame/Shooter2D/Shooter2D/Content/Sprites/enemy_dummy1.png</File>
     <File>C:/Users/maksr/Documents/C# progs/Monogame/Shooter2D/Shooter2D/Content/Sprites/floor-dummy1.png</File>
     <File>C:/Users/maksr/Documents/C# progs/Monogame/Shooter2D/Shooter2D/Content/Sprites/soldier_player_dummy.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

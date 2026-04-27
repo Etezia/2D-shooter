@@ -2,41 +2,61 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Object_components;
+using System;
+using System.Threading;
 
 namespace Shooter2D
 {
 	public class Game1 : Game
 	{
-		private GraphicsDeviceManager _graphics;
-		private SpriteBatch _spriteBatch;
+		private GraphicsDeviceManager graphics;
+		private SpriteBatch spriteBatch;
 		private const int DeltaTimeMS = 40;
+		
+		private Player player;
+		private ISprite floor;
 
-		private Player _player;
-		private Sprite _floor;
+		private Scene currScene;
+
+		private readonly Thread inputThread = 
+			new Thread(() => new InputManager().Update(25));
 
 		public Game1()
 		{
-			_graphics = new GraphicsDeviceManager(this);
+			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 			IsMouseVisible = true;
 		}
 
 		protected override void Initialize()
 		{
-			// TODO: Add your initialization logic here
-
+			Window.Title = "GameMaker.Import().MakeCoolGame(Graphics = ultra, " +
+				"Bugs = no, Architecture = cool and optimized)";
 			base.Initialize();
+
+			inputThread.Start();
+			this.Exiting += (object sender, ExitingEventArgs e) => inputThread.Abort();
 		}
 
 		protected override void LoadContent()
 		{
-			_spriteBatch = new SpriteBatch(GraphicsDevice);
+			var windowWidth = Window.ClientBounds.Width;
+			var windowHeight = Window.ClientBounds.Height;
+
+			spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			Content.RootDirectory = "Content/Sprites";
-			_player = new Player(Content.Load<Texture2D>("dummy1"),
-				new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2), ObjectTag.Player);
-			//_floor = new Sprite(Content.Load<Texture2D>("floor-dummy1"), new Vector2(100, 0));
 
+			player = new Player(Content.Load<Texture2D>("soldier_player_dummy"),
+				new Transform2D(new Vector2(windowWidth / 2, windowHeight / 2), 
+				Quaternion.Identity, new Point(64, 64)),
+				new RectCollider(64, 32));
+
+			currScene = new Scene();
+			currScene.AddPlayerOnScene(player);
+			currScene.CreateLevel(windowHeight, windowWidth, 0, 100, 0.1,
+				Content.Load<Texture2D>("enemy_dummy1"));
+			
 			TargetElapsedTime = new System.TimeSpan(0, 0, 0, 0, 1000 / DeltaTimeMS);
 		}
 
@@ -44,26 +64,18 @@ namespace Shooter2D
 		{
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed 
 				|| Keyboard.GetState().IsKeyDown(Keys.Escape))
+			{
 				Exit();
+			}
 
-			var dt = gameTime.ElapsedGameTime.TotalSeconds;
-
-			_player.Move((float)dt);
-
+			currScene.Update(gameTime);
 			base.Update(gameTime);
 		}
 
 		protected override void Draw(GameTime gameTime)
 		{
 			GraphicsDevice.Clear(Color.BurlyWood);
-
-			_spriteBatch.Begin(samplerState: SamplerState.PointWrap);
-
-			//_spriteBatch.Draw(_floor.Texture, _floor.Position, Color.White);
-			_spriteBatch.Draw(_player.Texture, _player.Position, Color.White);
-
-			_spriteBatch.End();
-
+			currScene.Draw(spriteBatch);
 			base.Draw(gameTime);
 		}
 	}

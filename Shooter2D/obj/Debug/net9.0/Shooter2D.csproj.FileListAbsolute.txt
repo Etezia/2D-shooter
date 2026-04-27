@@ -37,3 +37,4 @@ C:\Users\maksr\Documents\C# progs\Monogame\Shooter2D\Shooter2D\bin\Debug\net9.0\
 C:\Users\maksr\Documents\C# progs\Monogame\Shooter2D\Shooter2D\obj\Debug\net9.0\Shooter2D.sourcelink.json
 C:\Users\maksr\Documents\C# progs\Monogame\Shooter2D\Shooter2D\bin\Debug\net9.0\Object components.dll
 C:\Users\maksr\Documents\C# progs\Monogame\Shooter2D\Shooter2D\bin\Debug\net9.0\Object components.pdb
+C:\Users\maksr\Documents\C# progs\Monogame\Shooter2D\Shooter2D\bin\Debug\net9.0\Content\Sprites\enemy_dummy1.xnb

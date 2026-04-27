@@ -2,62 +2,43 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Object_components
+namespace Object_components;
+
+public record Transform2D(Vector2 position, Quaternion rotation,
+		Point scale)
 {
-	public class Transform2D
-	{
-		public Vector2 Position { get; set; }
-		public double Rotation { get; set; }
-		public Vector2 Scale { get; set; }
+	public Vector2 Position { get; private set; } = position;
+	public Quaternion Rotation { get; private set; } = rotation;
+	public Point Scale { get; private set; } = scale;
 
-		public Transform2D()
-		{
-			Position = Vector2.Zero;
-			Rotation = 0d;
-			Scale = new Vector2(400, 400);
-		}
+	public void SetPosition(Vector2 position) => Position = position;
 
-		public Transform2D(Vector2 position) : this()
-		{
-			Position = position;
-		}
+	public void SetRotation(Quaternion quaternion) => Rotation = quaternion;
 
-		public Transform2D(Vector2 position, Vector2 scale) : this()
-		{
-			Position = position;
-			Scale = scale;
-		}
-
-		public Transform2D(Vector2 position, double rotation, Vector2 scale)
-		{
-			Position = position;
-			Rotation = rotation;
-			Scale = scale;
-		}
-	}
+	public void SetScale(Point scale) => Scale = scale;	 
 }
 
 //Not implemented:
-	/*
-		private Transform2D _parent;
+/*
+	private Transform2D _parent;
 
-		private Action moveChildren;
-		public event Action MoveChildren
-		{
-			add => moveChildren += value;
-			remove => moveChildren -= value;
-		}
-	*/
+	private Action moveChildren;
+	public event Action MoveChildren
+	{
+		add => moveChildren += value;
+		remove => moveChildren -= value;
+	}
+*/
 
-	/* 
-		public void SetParent(Transform2D parent)
-		{
-			_parent = parent;
-			_parent.moveChildren += () => Console.WriteLine();
-		}
+/* 
+	public void SetParent(Transform2D parent)
+	{
+		_parent = parent;
+		_parent.moveChildren += () => Console.WriteLine();
+	}
 
-		public void ClearParent()
-		{
-			_parent = null;
-		}
-	*/
+	public void ClearParent()
+	{
+		_parent = null;
+	}
+*/
