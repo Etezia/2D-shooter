@@ -16,7 +16,7 @@ namespace Shooter2D
 		private Player player;
 		private ISprite floor;
 
-		private Scene currScene;
+		private MainScene currScene;
 
 		private readonly Thread inputThread = 
 			new Thread(() => new InputManager().Update(25));
@@ -47,14 +47,14 @@ namespace Shooter2D
 
 			Content.RootDirectory = "Content/Sprites";
 
-			player = new Player(Content.Load<Texture2D>("soldier_player_dummy"),
+			player = new Player(Content.Load<Texture2D>("dummy1"),
 				new Transform2D(new Vector2(windowWidth / 2, windowHeight / 2), 
 				Quaternion.Identity, new Point(64, 64)),
 				new RectCollider(64, 32));
 
-			currScene = new Scene();
+			currScene = new MainScene();
 			currScene.AddPlayerOnScene(player);
-			currScene.CreateLevel(windowHeight, windowWidth, 0, 100, 0.1,
+			currScene.CreateLevel(windowHeight + 100, windowWidth + 100, 0, 64, 0.15,
 				Content.Load<Texture2D>("enemy_dummy1"));
 			
 			TargetElapsedTime = new System.TimeSpan(0, 0, 0, 0, 1000 / DeltaTimeMS);

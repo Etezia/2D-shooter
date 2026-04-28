@@ -12,8 +12,8 @@ namespace Shooter2D
 {
 	internal class Player : ISprite, IDynamicObject, ICollidingObject
 	{
-		private const float velX = 5f;
-		private const float velY = 5f;
+		public readonly float VelX = 5f;
+		public readonly float VelY = 5f;
 
 		public Transform2D Transform { get; private set; }
 		public Texture2D Texture { get; private set; }
@@ -26,7 +26,7 @@ namespace Shooter2D
 			Texture = texture;
 			Transform = transform;
 			Collider = collider;
-			Physics = new Physics(new Vector2(velX, velY));
+			Physics = new Physics(new Vector2(VelX, VelY));
 
 			SetDescriptions();
 		}
