@@ -11,3 +11,17 @@ C:\Users\maksr\Documents\C# progs\Monogame\Shooter2D\Object components\obj\Debug
 C:\Users\maksr\Documents\C# progs\Monogame\Shooter2D\Object components\obj\Debug\net9.0\refint\Object components.dll
 C:\Users\maksr\Documents\C# progs\Monogame\Shooter2D\Object components\obj\Debug\net9.0\Object components.pdb
 C:\Users\maksr\Documents\C# progs\Monogame\Shooter2D\Object components\obj\Debug\net9.0\ref\Object components.dll
+C:\Users\maksr\Documents\C# programms\2D-shooter\Object components\bin\Debug\net9.0\Object components.deps.json
+C:\Users\maksr\Documents\C# programms\2D-shooter\Object components\bin\Debug\net9.0\Object components.dll
+C:\Users\maksr\Documents\C# programms\2D-shooter\Object components\bin\Debug\net9.0\Object components.pdb
+C:\Users\maksr\Documents\C# programms\2D-shooter\Object components\obj\Debug\net9.0\Object components.csproj.AssemblyReference.cache
+C:\Users\maksr\Documents\C# programms\2D-shooter\Object components\obj\Debug\net9.0\Object components.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\maksr\Documents\C# programms\2D-shooter\Object components\obj\Debug\net9.0\Object components.AssemblyInfoInputs.cache
+C:\Users\maksr\Documents\C# programms\2D-shooter\Object components\obj\Debug\net9.0\Object components.AssemblyInfo.cs
+C:\Users\maksr\Documents\C# programms\2D-shooter\Object components\obj\Debug\net9.0\Object components.csproj.CoreCompileInputs.cache
+C:\Users\maksr\Documents\C# programms\2D-shooter\Object components\obj\Debug\net9.0\Object components.sourcelink.json
+C:\Users\maksr\Documents\C# programms\2D-shooter\Object components\obj\Debug\net9.0\Object components.dll
+C:\Users\maksr\Documents\C# programms\2D-shooter\Object components\obj\Debug\net9.0\refint\Object components.dll
+C:\Users\maksr\Documents\C# programms\2D-shooter\Object components\obj\Debug\net9.0\Object components.pdb
+C:\Users\maksr\Documents\C# programms\2D-shooter\Object components\obj\Debug\net9.0\ref\Object components.dll
+C:\Users\maksr\Documents\C# programms\2D-shooter\Object components\obj\Debug\net9.0\mgcb.tool.restore

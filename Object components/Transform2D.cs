@@ -4,16 +4,16 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Object_components;
 
-public record Transform2D(Vector2 position, Quaternion rotation,
+public record Transform2D(Vector2 position, float rotation,
 		Point scale)
 {
 	public Vector2 Position { get; private set; } = position;
-	public Quaternion Rotation { get; private set; } = rotation;
+	public float Rotation { get; private set; } = rotation;
 	public Point Scale { get; private set; } = scale;
-
+	
 	public void SetPosition(Vector2 position) => Position = position;
 
-	public void SetRotation(Quaternion quaternion) => Rotation = quaternion;
+	public void SetRotation(float quaternion) => Rotation = quaternion;
 
 	public void SetScale(Point scale) => Scale = scale;	 
 }

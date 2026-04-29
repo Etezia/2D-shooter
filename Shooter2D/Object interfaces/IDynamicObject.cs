@@ -5,7 +5,7 @@ namespace Shooter2D
 {
 	internal interface IDynamicObject
 	{
-		public Physics Physics { get; }
+		public Physics CameraPhysics { get; }
 		public Transform2D Transform { get; }
 	}
 }

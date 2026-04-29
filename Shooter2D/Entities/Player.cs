@@ -18,7 +18,7 @@ namespace Shooter2D
 		public Transform2D Transform { get; private set; }
 		public Texture2D Texture { get; private set; }
 		public ICollider Collider { get; private set; }
-		public Physics Physics { get; private set; }
+		public Physics CameraPhysics { get; private set; }
 
 		public Player(Texture2D texture, Transform2D transform, 
 			RectCollider collider)
@@ -26,7 +26,7 @@ namespace Shooter2D
 			Texture = texture;
 			Transform = transform;
 			Collider = collider;
-			Physics = new Physics(new Vector2(VelX, VelY));
+			CameraPhysics = new Physics(new Vector2(VelX, VelY));
 
 			SetDescriptions();
 		}
@@ -34,13 +34,13 @@ namespace Shooter2D
 		private void SetDescriptions()
 		{
 			InputManager.OnKeyUp +=
-				() => Physics.Translate(InputManager.UpVector, Transform);
+				() => CameraPhysics.Translate(InputManager.UpVector, Transform);
 			InputManager.OnKeyDown +=
-				() => Physics.Translate(InputManager.DownVector, Transform);
+				() => CameraPhysics.Translate(InputManager.DownVector, Transform);
 			InputManager.OnKeyLeft +=
-				() => Physics.Translate(InputManager.LeftVector, Transform);
+				() => CameraPhysics.Translate(InputManager.LeftVector, Transform);
 			InputManager.OnKeyRight +=
-				() => Physics.Translate(InputManager.RightVector, Transform);
+				() => CameraPhysics.Translate(InputManager.RightVector, Transform);
 		}
 	}
 }

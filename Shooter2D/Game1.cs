@@ -16,8 +16,6 @@ namespace Shooter2D
 		private Player player;
 		private ISprite floor;
 
-		private MainScene currScene;
-
 		private readonly Thread inputThread = 
 			new Thread(() => new InputManager().Update(25));
 
@@ -30,8 +28,13 @@ namespace Shooter2D
 
 		protected override void Initialize()
 		{
+			graphics.PreferredBackBufferHeight = 720;
+			graphics.PreferredBackBufferWidth = 1280;
+			graphics.ApplyChanges();
+
 			Window.Title = "GameMaker.Import().MakeCoolGame(Graphics = ultra, " +
 				"Bugs = no, Architecture = cool and optimized)";
+
 			base.Initialize();
 
 			inputThread.Start();
@@ -49,14 +52,10 @@ namespace Shooter2D
 
 			player = new Player(Content.Load<Texture2D>("dummy1"),
 				new Transform2D(new Vector2(windowWidth / 2, windowHeight / 2), 
-				Quaternion.Identity, new Point(64, 64)),
-				new RectCollider(64, 32));
+				0f, new Point(50, 50)), new RectCollider(50, 25));
 
-			currScene = new MainScene();
-			currScene.AddPlayerOnScene(player);
-			currScene.CreateLevel(windowHeight + 100, windowWidth + 100, 0, 64, 0.15,
-				Content.Load<Texture2D>("enemy_dummy1"));
-			
+			SceneManager.Initialize(Content, Window, player);
+
 			TargetElapsedTime = new System.TimeSpan(0, 0, 0, 0, 1000 / DeltaTimeMS);
 		}
 
@@ -68,14 +67,16 @@ namespace Shooter2D
 				Exit();
 			}
 
-			currScene.Update(gameTime);
+			Window.Title = (1000000000 / gameTime.ElapsedGameTime.TotalNanoseconds).ToString();
+
+			SceneManager.Update(gameTime);
 			base.Update(gameTime);
 		}
 
 		protected override void Draw(GameTime gameTime)
 		{
 			GraphicsDevice.Clear(Color.BurlyWood);
-			currScene.Draw(spriteBatch);
+			SceneManager.Draw(spriteBatch);
 			base.Draw(gameTime);
 		}
 	}

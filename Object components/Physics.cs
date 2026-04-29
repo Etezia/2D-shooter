@@ -16,6 +16,6 @@ public record Physics (Vector2 velocity)
 	public void Translate(Vector2 vector, Transform2D transform) => 
 		transform.SetPosition(transform.Position + vector * Velocity);
 
-	public void Rotate(Quaternion quaternion, Transform2D transform) =>
-		transform.SetRotation(transform.Rotation + quaternion);
+	public void Rotate(float angle, Transform2D transform) =>
+		transform.SetRotation(transform.Rotation + angle);
 }
