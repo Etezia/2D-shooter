@@ -21,6 +21,9 @@
     <EmbeddedResource Include="Icon.bmp">
       <LogicalName>Icon.bmp</LogicalName>
     </EmbeddedResource>
+    <None Update="Config\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.Content.Pipeline" Version="3.8.4.1" />
@@ -30,4 +33,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Object components\Object components.csproj" />
   </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties config_4rendercfg_1json__JsonSchema="https://api.app-prg1.zerops.io/api/rest/public/settings/import-project-yml-json-schema.json" /></VisualStudio></ProjectExtensions>
 </Project>

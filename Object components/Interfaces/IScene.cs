@@ -5,11 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Object_components;
 
-namespace Shooter2D;
+namespace Object_components;
 
-internal interface IScene
+public interface IScene
 {
 
 	public List<object> GameObjects { get; }

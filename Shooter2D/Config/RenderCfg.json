@@ -1,0 +1,18 @@
+{
+    "Layers" : {
+        "Floor" : 1.0,
+        "Player" : 0.3,
+        "Enemy" : 0.3,
+        "Wall" : 0.9,
+        "Collectables" : 0.6,
+        "Environment" : 0.5,
+        "Weapon" : 0.2
+    },
+
+    "Graphics" : {
+        "Screen-resolution" : {
+            "W" : 1280,
+            "H" : 720
+        }
+    }
+}

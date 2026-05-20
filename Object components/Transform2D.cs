@@ -1,15 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.ComponentModel;
 
 namespace Object_components;
 
 public record Transform2D(Vector2 position, float rotation,
-		Point scale)
+		Point scale, float layer)
 {
 	public Vector2 Position { get; private set; } = position;
 	public float Rotation { get; private set; } = rotation;
 	public Point Scale { get; private set; } = scale;
+	[Description("Order of object processing. Takes values from 0 to 1. 0 means higher priority.")]
+	public float Layer { get; private set; } = Math.Max(0, Math.Min(layer, 1));
 	
 	public void SetPosition(Vector2 position) => Position = position;
 

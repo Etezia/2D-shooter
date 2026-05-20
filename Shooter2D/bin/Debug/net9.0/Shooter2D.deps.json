@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v9.0": {
       "Shooter2D/1.0.0": {
         "dependencies": {
+          "MonoGame.Content.Builder.Task": "3.8.4.1",
           "MonoGame.Framework.Content.Pipeline": "3.8.4.1",
           "MonoGame.Framework.DesktopGL": "3.8.4.1"
         },
@@ -74,6 +75,27 @@
           }
         }
       },
+      "Microsoft.NETCore.App/2.1.30": {
+        "dependencies": {
+          "Microsoft.NETCore.DotNetHostPolicy": "2.1.30",
+          "Microsoft.NETCore.Platforms": "2.1.14",
+          "Microsoft.NETCore.Targets": "2.0.0",
+          "NETStandard.Library": "2.0.3"
+        }
+      },
+      "Microsoft.NETCore.DotNetAppHost/2.1.30": {},
+      "Microsoft.NETCore.DotNetHostPolicy/2.1.30": {
+        "dependencies": {
+          "Microsoft.NETCore.DotNetHostResolver": "2.1.30"
+        }
+      },
+      "Microsoft.NETCore.DotNetHostResolver/2.1.30": {
+        "dependencies": {
+          "Microsoft.NETCore.DotNetAppHost": "2.1.30"
+        }
+      },
+      "Microsoft.NETCore.Platforms/2.1.14": {},
+      "Microsoft.NETCore.Targets/2.0.0": {},
       "Microsoft.Toolkit.HighPerformance/7.0.2": {
         "runtime": {
           "lib/net5.0/Microsoft.Toolkit.HighPerformance.dll": {
@@ -82,11 +104,13 @@
           }
         }
       },
+      "MonoGame.Content.Builder.Task/3.8.4.1": {},
       "MonoGame.Framework.Content.Pipeline/3.8.4.1": {
         "dependencies": {
           "AssimpNetter": "5.4.3.3",
           "BCnEncoder.Net": "2.1.0",
           "LibKTX": "0.9.2",
+          "Microsoft.NETCore.App": "2.1.30",
           "MonoGame.Library.FreeImage": "3.18.0.3",
           "MonoGame.Library.FreeType": "2.13.2.2",
           "MonoGame.Tool.Basisu": "1.60.0.2",
@@ -275,7 +299,16 @@
           }
         }
       },
+      "NETStandard.Library/2.0.3": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "2.1.14"
+        }
+      },
       "NVorbis/0.10.4": {
+        "dependencies": {
+          "System.Memory": "4.5.3",
+          "System.ValueTuple": "4.5.0"
+        },
         "runtime": {
           "lib/netstandard2.0/NVorbis.dll": {
             "assemblyVersion": "0.10.4.0",
@@ -284,6 +317,9 @@
         }
       },
       "SharpDX/4.0.1": {
+        "dependencies": {
+          "Microsoft.NETCore.App": "2.1.30"
+        },
         "runtime": {
           "lib/netcoreapp1.0/SharpDX.dll": {
             "assemblyVersion": "4.0.1.0",
@@ -293,6 +329,7 @@
       },
       "SharpDX.D3DCompiler/4.0.1": {
         "dependencies": {
+          "Microsoft.NETCore.App": "2.1.30",
           "SharpDX": "4.0.1"
         },
         "runtime": {
@@ -302,8 +339,11 @@
           }
         }
       },
+      "System.Memory/4.5.3": {},
+      "System.ValueTuple/4.5.0": {},
       "Object components/1.0.0": {
         "dependencies": {
+          "MonoGame.Content.Builder.Task": "3.8.4.1",
           "MonoGame.Framework.Content.Pipeline": "3.8.4.1",
           "MonoGame.Framework.DesktopGL": "3.8.4.1"
         },
@@ -343,12 +383,61 @@
       "path": "libktx/0.9.2",
       "hashPath": "libktx.0.9.2.nupkg.sha512"
     },
+    "Microsoft.NETCore.App/2.1.30": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Hs73dGereVEUeE0f9nGgNrTgESyhm/41pQ3gIW7P/Bwv8yBJwsw8T0Yb40uessXNU6HcfZstudf70+yaHHK/sw==",
+      "path": "microsoft.netcore.app/2.1.30",
+      "hashPath": "microsoft.netcore.app.2.1.30.nupkg.sha512"
+    },
+    "Microsoft.NETCore.DotNetAppHost/2.1.30": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rbRBSaCEWZfVMVum2OulEELLjFWmiLmJIxeuODOUPgMuDXses4OOc/iQUf8qzNpWCRVGlYXQ0eV1m4Ic1RfVCA==",
+      "path": "microsoft.netcore.dotnetapphost/2.1.30",
+      "hashPath": "microsoft.netcore.dotnetapphost.2.1.30.nupkg.sha512"
+    },
+    "Microsoft.NETCore.DotNetHostPolicy/2.1.30": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0NCIUV9mlKQeIKnX6UzVvPAFFlqJKxLXmrk3/X7sMSNuX/9JpxleICmkTsHGdDQSoLiUz087pN6UvQinu3btzA==",
+      "path": "microsoft.netcore.dotnethostpolicy/2.1.30",
+      "hashPath": "microsoft.netcore.dotnethostpolicy.2.1.30.nupkg.sha512"
+    },
+    "Microsoft.NETCore.DotNetHostResolver/2.1.30": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4kf9/unrbokd9+gsM6pU/eoHfz9yhGXU2pTSDWLQzhYHfOZuBjT0Ky+GVQzy4AOkxX5hw+lVLYsDXpFgCCZroQ==",
+      "path": "microsoft.netcore.dotnethostresolver/2.1.30",
+      "hashPath": "microsoft.netcore.dotnethostresolver.2.1.30.nupkg.sha512"
+    },
+    "Microsoft.NETCore.Platforms/2.1.14": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NIgzPaYG5IW3uX6trg+no4Z9oOaoeIR4QlvPeiA3P+dgozN/cS1XwyTnIrZmiGZ9GrvcD2ad01O4UiED6hogpw==",
+      "path": "microsoft.netcore.platforms/2.1.14",
+      "hashPath": "microsoft.netcore.platforms.2.1.14.nupkg.sha512"
+    },
+    "Microsoft.NETCore.Targets/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-odP/tJj1z6GylFpNo7pMtbd/xQgTC3Ex2If63dRTL38bBNMwsBnJ+RceUIyHdRBC0oik/3NehYT+oECwBhIM3Q==",
+      "path": "microsoft.netcore.targets/2.0.0",
+      "hashPath": "microsoft.netcore.targets.2.0.0.nupkg.sha512"
+    },
     "Microsoft.Toolkit.HighPerformance/7.0.2": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-tG6v0AhDw/yJMtiH/tI4F6I/+sNIfu4++6WFfN73FyNcPh31et33w45wo8Lx1sfxcfLtkYk+w2fvU/MubYg4VQ==",
       "path": "microsoft.toolkit.highperformance/7.0.2",
       "hashPath": "microsoft.toolkit.highperformance.7.0.2.nupkg.sha512"
+    },
+    "MonoGame.Content.Builder.Task/3.8.4.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jf6IZXMiOhuybRaWQt//u+804yzMRGk3ZRvlBJG/0iusRwTunJsQvA6tMMJJc7gjUrY6rUkzRqwinKWXugyHfA==",
+      "path": "monogame.content.builder.task/3.8.4.1",
+      "hashPath": "monogame.content.builder.task.3.8.4.1.nupkg.sha512"
     },
     "MonoGame.Framework.Content.Pipeline/3.8.4.1": {
       "type": "package",
@@ -420,6 +509,13 @@
       "path": "monogame.tool.ffprobe/7.0.0.8",
       "hashPath": "monogame.tool.ffprobe.7.0.0.8.nupkg.sha512"
     },
+    "NETStandard.Library/2.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
+      "path": "netstandard.library/2.0.3",
+      "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
+    },
     "NVorbis/0.10.4": {
       "type": "package",
       "serviceable": true,
@@ -440,6 +536,20 @@
       "sha512": "sha512-D3OzwToJ8j8dDOeJxUGUxJFwSnTQ89jJejSQkhuIsaBGh8Wd8DhQzmcsKzQaoLnzLBECS1Y37y9bGQaw3CnhxA==",
       "path": "sharpdx.d3dcompiler/4.0.1",
       "hashPath": "sharpdx.d3dcompiler.4.0.1.nupkg.sha512"
+    },
+    "System.Memory/4.5.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3oDzvc/zzetpTKWMShs1AADwZjQ/36HnsufHRPcOjyRAAMLDlu2iD33MBI2opxnezcVUtXyqDXXjoFMOU9c7SA==",
+      "path": "system.memory/4.5.3",
+      "hashPath": "system.memory.4.5.3.nupkg.sha512"
+    },
+    "System.ValueTuple/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-okurQJO6NRE/apDIP23ajJ0hpiNmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ==",
+      "path": "system.valuetuple/4.5.0",
+      "hashPath": "system.valuetuple.4.5.0.nupkg.sha512"
     },
     "Object components/1.0.0": {
       "type": "project",

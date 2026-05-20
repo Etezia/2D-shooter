@@ -25,3 +25,4 @@ C:\Users\maksr\Documents\C# programms\2D-shooter\Object components\obj\Debug\net
 C:\Users\maksr\Documents\C# programms\2D-shooter\Object components\obj\Debug\net9.0\Object components.pdb
 C:\Users\maksr\Documents\C# programms\2D-shooter\Object components\obj\Debug\net9.0\ref\Object components.dll
 C:\Users\maksr\Documents\C# programms\2D-shooter\Object components\obj\Debug\net9.0\mgcb.tool.restore
+C:\Users\maksr\Documents\C# progs\Monogame\Shooter2D\Object components\obj\Debug\net9.0\mgcb.tool.restore

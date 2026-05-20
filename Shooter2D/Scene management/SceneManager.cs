@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using Object_components;
 
 namespace Shooter2D;
 
@@ -25,11 +26,15 @@ internal static class SceneManager
 		contentManager = content;
 		gameWindow = window;
 
-
 		mainScene = new LevelScene(content);
 		if (player != null) 
 			mainScene.AddPlayerOnScene(player);
-		
+
+		AddScenesToList();
+	}
+
+	private static void AddScenesToList()
+	{
 		scenes.Add(mainScene);
 	}
 
@@ -45,16 +50,17 @@ internal static class SceneManager
 
 	public static void AddPlayerOnScene(this LevelScene scene, Player player)
 	{
+		player.Collider.SetCollidingObjects(scene.GameObjectDict[typeof(ICollidingObject)]);
 		scene.GameObjects.Add(player);
-		scene.CameraPhysics.SetVelocity(new Vector2(player.VelX, player.VelY));
+		scene.ObjectPhysics.SetVelocity(new Vector2(player.VelX, player.VelY));
 
 		InputManager.OnKeyUp +=
-			() => scene.CameraPhysics.Translate(InputManager.DownVector, scene.Transform);
+			() => scene.ObjectPhysics.Translate(InputManager.DownVector, scene.Transform);
 		InputManager.OnKeyDown +=
-			() => scene.CameraPhysics.Translate(InputManager.UpVector, scene.Transform);
+			() => scene.ObjectPhysics.Translate(InputManager.UpVector, scene.Transform);
 		InputManager.OnKeyLeft +=
-			() => scene.CameraPhysics.Translate(InputManager.RightVector, scene.Transform);
+			() => scene.ObjectPhysics.Translate(InputManager.RightVector, scene.Transform);
 		InputManager.OnKeyRight +=
-			() => scene.CameraPhysics.Translate(InputManager.LeftVector, scene.Transform);
+			() => scene.ObjectPhysics.Translate(InputManager.LeftVector, scene.Transform);
 	}
 }

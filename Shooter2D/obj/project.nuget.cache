@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DHBPgagssjE=",
+  "dgSpecHash": "YrDGloK3j8g=",
   "success": true,
-  "projectFilePath": "C:\\Users\\maksr\\Documents\\C# programms\\2D-shooter\\Shooter2D\\Shooter2D.csproj",
+  "projectFilePath": "C:\\Users\\maksr\\Documents\\C# progs\\Monogame\\Shooter2D\\Shooter2D\\Shooter2D.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\maksr\\.nuget\\packages\\assimpnetter\\5.4.3.3\\assimpnetter.5.4.3.3.nupkg.sha512",
     "C:\\Users\\maksr\\.nuget\\packages\\bcnencoder.net\\2.1.0\\bcnencoder.net.2.1.0.nupkg.sha512",

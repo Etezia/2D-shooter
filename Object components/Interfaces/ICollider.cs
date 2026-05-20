@@ -15,7 +15,8 @@ public interface ICollider
 	public float Height { get; }
 
 	public float Right { get; }
-	public float Top { get; }
+	public float Bottom { get; }
 
-	public bool Collides(ICollider collider, Vector2 position);
+	public void SetCollidingObjects(List<object> objects);
+	public bool HasCollisions(Vector2 position);
 }

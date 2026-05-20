@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Object_components;
 using System;
 using System.Threading;
+using static Shooter2D.ConfigurationManager;
 
 namespace Shooter2D
 {
@@ -28,13 +29,17 @@ namespace Shooter2D
 
 		protected override void Initialize()
 		{
-			graphics.PreferredBackBufferHeight = 720;
+
 			graphics.PreferredBackBufferWidth = 1280;
+			graphics.PreferredBackBufferHeight = 720;
 			graphics.ApplyChanges();
+
+			//graphics.ToggleFullScreen();
 
 			Window.Title = "GameMaker.Import().MakeCoolGame(Graphics = ultra, " +
 				"Bugs = no, Architecture = cool and optimized)";
 
+			ConfigurationManager.Initialize();
 			base.Initialize();
 
 			inputThread.Start();
@@ -52,7 +57,7 @@ namespace Shooter2D
 
 			player = new Player(Content.Load<Texture2D>("dummy1"),
 				new Transform2D(new Vector2(windowWidth / 2, windowHeight / 2), 
-				0f, new Point(50, 50)), new RectCollider(50, 25));
+				0f, new Point(50, 50), Layers.Player), new RectCollider(50, 25, y: 25));
 
 			SceneManager.Initialize(Content, Window, player);
 

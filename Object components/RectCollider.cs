@@ -9,13 +9,17 @@ namespace Object_components
 {
 	public class RectCollider : ICollider
 	{
+		private const int Offset = 0;
+
 		public float X { get; private set; }
 		public float Y { get; private set; }
 		public float Width { get; private set; }
 		public float Height { get; private set; }
 
 		public float Right { get => X + Width; }
-		public float Top { get => Y - Height; }
+		public float Bottom { get => Y + Height; }
+
+		private List<object> collidingObjects = new List<object>();
 
 		public RectCollider(float width, float height, float x = 0, float y = 0)
 		{
@@ -25,13 +29,33 @@ namespace Object_components
 			Y = y;
 		}
 
-		public bool Collides(ICollider collider, Vector2 position)
+		public void SetCollidingObjects(List<object> objects)
 		{
-			if (collider is RectCollider)
-				return X + position.X < collider.Right + position.X &&
-				Right + position.X > collider.X + position.X &&
-				Y + position.Y > collider.Top + position.Y &&
-				collider.Y + position.Y > Top + position.Y;
+			collidingObjects = objects;
+		}
+
+		public bool HasCollisions(Vector2 position)
+		{
+			var currLeft = position.X + X - Offset;
+			var currTop = position.Y + Y - Offset;
+			var currRight = position.X + Right + Offset;
+			var currBottom = position.Y + Bottom + Offset;
+
+			foreach (var obj in collidingObjects.OfType<ICollidingObject>())
+			{
+				if (obj.Collider is RectCollider)
+				{
+					var collider = obj.Collider;
+					var objPositionX = obj.Transform.Position.X;
+					var objPositionY = obj.Transform.Position.Y;
+
+					if (currLeft < collider.Right + objPositionX &&
+						currRight > collider.X + objPositionX &&
+						currBottom > collider.Y + objPositionY &&
+						currTop < collider.Bottom + objPositionY)
+						return true;
+				}
+			}
 			return false;
 		}
 	}

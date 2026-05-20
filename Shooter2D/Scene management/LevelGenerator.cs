@@ -25,8 +25,9 @@ internal static class LevelGenerator
 					result[i, j] = CellState.Wall;
 				else
 					result[i, j] = randNum < probability ? CellState.Enemy : CellState.Empty;
+				//randNum < probability ? CellState.Enemy : CellState.Empty;
 			}
-				
+
 
 		return result;
 	}

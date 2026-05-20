@@ -18,7 +18,7 @@ namespace Shooter2D
 		public Texture2D Texture { get; private set; }
 		public Transform2D Transform { get; private set; }
 		public ICollider Collider { get; private set; }
-		public Physics CameraPhysics { get; private set; }
+		public Physics ObjectPhysics { get; private set; }
 		
 		public Enemy(Texture2D texture, Transform2D transform, 
 			RectCollider collider) 
@@ -26,7 +26,7 @@ namespace Shooter2D
 			Texture = texture;
 			Transform = transform;
 			Collider = collider;
-			CameraPhysics = new Physics(new Vector2(velX, velY));
+			ObjectPhysics = new Physics(new Vector2(velX, velY), collider);
 		}
 	}
 }

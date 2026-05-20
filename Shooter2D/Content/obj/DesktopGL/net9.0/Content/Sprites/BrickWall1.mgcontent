@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/maksr/Documents/C# programms/2D-shooter/Shooter2D/Content/Sprites/BrickWall1.png</SourceFile>
-  <SourceTime>2026-04-28T15:17:28.0255556+05:00</SourceTime>
-  <DestFile>C:/Users/maksr/Documents/C# programms/2D-shooter/Shooter2D/Content/bin/DesktopGL/Content/Sprites/BrickWall1.xnb</DestFile>
-  <DestTime>2026-04-28T15:32:07.2043373+05:00</DestTime>
+  <SourceFile>C:/Users/maksr/Documents/C# progs/Monogame/Shooter2D/Shooter2D/Content/Sprites/BrickWall1.png</SourceFile>
+  <SourceTime>2026-04-29T20:07:01.3690735+05:00</SourceTime>
+  <DestFile>C:/Users/maksr/Documents/C# progs/Monogame/Shooter2D/Shooter2D/Content/bin/DesktopGL/Content/Sprites/BrickWall1.xnb</DestFile>
+  <DestTime>2026-04-29T20:15:28.2428187+05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-10-20T19:25:32+05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

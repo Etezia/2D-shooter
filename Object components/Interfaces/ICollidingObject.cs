@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Object_components;
 
-namespace Shooter2D
+namespace Object_components;
+
+public interface ICollidingObject
 {
-	internal interface ICollidingObject
-	{
-		public ICollider Collider { get; }
-	}
+	public Transform2D Transform { get; }
+	public ICollider Collider { get; }
 }

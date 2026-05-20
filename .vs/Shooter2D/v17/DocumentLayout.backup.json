@@ -1,22 +1,30 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\maksr\\Documents\\C# programms\\2D-shooter\\",
+  "WorkspaceRootPath": "C:\\Users\\maksr\\Documents\\C# progs\\Monogame\\Shooter2D\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{175B22BB-1DAD-4704-8E20-495C5D14233D}|Shooter2D\\Shooter2D.csproj|c:\\users\\maksr\\documents\\c# programms\\2d-shooter\\shooter2d\\scene management\\levelscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{175B22BB-1DAD-4704-8E20-495C5D14233D}|Shooter2D\\Shooter2D.csproj|c:\\users\\maksr\\documents\\c# progs\\monogame\\shooter2d\\shooter2d\\scene management\\scenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{175B22BB-1DAD-4704-8E20-495C5D14233D}|Shooter2D\\Shooter2D.csproj|solutionrelative:shooter2d\\scene management\\scenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{175B22BB-1DAD-4704-8E20-495C5D14233D}|Shooter2D\\Shooter2D.csproj|c:\\users\\maksr\\documents\\c# progs\\monogame\\shooter2d\\shooter2d\\scene management\\levelscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{175B22BB-1DAD-4704-8E20-495C5D14233D}|Shooter2D\\Shooter2D.csproj|solutionrelative:shooter2d\\scene management\\levelscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{175B22BB-1DAD-4704-8E20-495C5D14233D}|Shooter2D\\Shooter2D.csproj|c:\\users\\maksr\\documents\\c# programms\\2d-shooter\\shooter2d\\entities\\decorativeenvironment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{175B22BB-1DAD-4704-8E20-495C5D14233D}|Shooter2D\\Shooter2D.csproj|solutionrelative:shooter2d\\entities\\decorativeenvironment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{175B22BB-1DAD-4704-8E20-495C5D14233D}|Shooter2D\\Shooter2D.csproj|c:\\users\\maksr\\documents\\c# programms\\2d-shooter\\shooter2d\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{175B22BB-1DAD-4704-8E20-495C5D14233D}|Shooter2D\\Shooter2D.csproj|c:\\users\\maksr\\documents\\c# progs\\monogame\\shooter2d\\shooter2d\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{175B22BB-1DAD-4704-8E20-495C5D14233D}|Shooter2D\\Shooter2D.csproj|solutionrelative:shooter2d\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{175B22BB-1DAD-4704-8E20-495C5D14233D}|Shooter2D\\Shooter2D.csproj|c:\\users\\maksr\\documents\\c# programms\\2d-shooter\\shooter2d\\scene management\\scenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{175B22BB-1DAD-4704-8E20-495C5D14233D}|Shooter2D\\Shooter2D.csproj|solutionrelative:shooter2d\\scene management\\scenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{175B22BB-1DAD-4704-8E20-495C5D14233D}|Shooter2D\\Shooter2D.csproj|c:\\users\\maksr\\documents\\c# progs\\monogame\\shooter2d\\shooter2d\\management systems\\configurationmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{175B22BB-1DAD-4704-8E20-495C5D14233D}|Shooter2D\\Shooter2D.csproj|solutionrelative:shooter2d\\management systems\\configurationmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83C8D2F9-8E4E-4AB4-AC63-EBFA515EA5F8}|Object components\\Object components.csproj|c:\\users\\maksr\\documents\\c# progs\\monogame\\shooter2d\\object components\\transform2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83C8D2F9-8E4E-4AB4-AC63-EBFA515EA5F8}|Object components\\Object components.csproj|solutionrelative:object components\\transform2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{175B22BB-1DAD-4704-8E20-495C5D14233D}|Shooter2D\\Shooter2D.csproj|c:\\users\\maksr\\documents\\c# progs\\monogame\\shooter2d\\shooter2d\\entities\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{175B22BB-1DAD-4704-8E20-495C5D14233D}|Shooter2D\\Shooter2D.csproj|solutionrelative:shooter2d\\entities\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,59 +34,103 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DecorativeEnvironment.cs",
-              "DocumentMoniker": "C:\\Users\\maksr\\Documents\\C# programms\\2D-shooter\\Shooter2D\\Entities\\DecorativeEnvironment.cs",
-              "RelativeDocumentMoniker": "Shooter2D\\Entities\\DecorativeEnvironment.cs",
-              "ToolTip": "C:\\Users\\maksr\\Documents\\C# programms\\2D-shooter\\Shooter2D\\Entities\\DecorativeEnvironment.cs",
-              "RelativeToolTip": "Shooter2D\\Entities\\DecorativeEnvironment.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAACAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "ConfigurationManager.cs",
+              "DocumentMoniker": "C:\\Users\\maksr\\Documents\\C# progs\\Monogame\\Shooter2D\\Shooter2D\\Management systems\\ConfigurationManager.cs",
+              "RelativeDocumentMoniker": "Shooter2D\\Management systems\\ConfigurationManager.cs",
+              "ToolTip": "C:\\Users\\maksr\\Documents\\C# progs\\Monogame\\Shooter2D\\Shooter2D\\Management systems\\ConfigurationManager.cs",
+              "RelativeToolTip": "Shooter2D\\Management systems\\ConfigurationManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-29T14:10:28.005Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-09T18:43:52.379Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Transform2D.cs",
+              "DocumentMoniker": "C:\\Users\\maksr\\Documents\\C# progs\\Monogame\\Shooter2D\\Object components\\Transform2D.cs",
+              "RelativeDocumentMoniker": "Object components\\Transform2D.cs",
+              "ToolTip": "C:\\Users\\maksr\\Documents\\C# progs\\Monogame\\Shooter2D\\Object components\\Transform2D.cs",
+              "RelativeToolTip": "Object components\\Transform2D.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T18:01:34.641Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "SceneManager.cs",
+              "DocumentMoniker": "C:\\Users\\maksr\\Documents\\C# progs\\Monogame\\Shooter2D\\Shooter2D\\Scene management\\SceneManager.cs",
+              "RelativeDocumentMoniker": "Shooter2D\\Scene management\\SceneManager.cs",
+              "ToolTip": "C:\\Users\\maksr\\Documents\\C# progs\\Monogame\\Shooter2D\\Shooter2D\\Scene management\\SceneManager.cs",
+              "RelativeToolTip": "Shooter2D\\Scene management\\SceneManager.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAADwAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T11:42:18.427Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Users\\maksr\\Documents\\C# progs\\Monogame\\Shooter2D\\Shooter2D\\Entities\\Player.cs",
+              "RelativeDocumentMoniker": "Shooter2D\\Entities\\Player.cs",
+              "ToolTip": "C:\\Users\\maksr\\Documents\\C# progs\\Monogame\\Shooter2D\\Shooter2D\\Entities\\Player.cs",
+              "RelativeToolTip": "Shooter2D\\Entities\\Player.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-30T11:52:40.532Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "LevelScene.cs",
-              "DocumentMoniker": "C:\\Users\\maksr\\Documents\\C# programms\\2D-shooter\\Shooter2D\\Scene management\\LevelScene.cs",
+              "DocumentMoniker": "C:\\Users\\maksr\\Documents\\C# progs\\Monogame\\Shooter2D\\Shooter2D\\Scene management\\LevelScene.cs",
               "RelativeDocumentMoniker": "Shooter2D\\Scene management\\LevelScene.cs",
-              "ToolTip": "C:\\Users\\maksr\\Documents\\C# programms\\2D-shooter\\Shooter2D\\Scene management\\LevelScene.cs*",
-              "RelativeToolTip": "Shooter2D\\Scene management\\LevelScene.cs*",
-              "ViewState": "AgIAADIAAAAAAAAAAAAwwD8AAAAFAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\maksr\\Documents\\C# progs\\Monogame\\Shooter2D\\Shooter2D\\Scene management\\LevelScene.cs",
+              "RelativeToolTip": "Shooter2D\\Scene management\\LevelScene.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAIwBEAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-07T18:31:59.828Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SceneManager.cs",
-              "DocumentMoniker": "C:\\Users\\maksr\\Documents\\C# programms\\2D-shooter\\Shooter2D\\Scene management\\SceneManager.cs",
-              "RelativeDocumentMoniker": "Shooter2D\\Scene management\\SceneManager.cs",
-              "ToolTip": "C:\\Users\\maksr\\Documents\\C# programms\\2D-shooter\\Shooter2D\\Scene management\\SceneManager.cs",
-              "RelativeToolTip": "Shooter2D\\Scene management\\SceneManager.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAswB8AAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-28T10:36:32.058Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Game1.cs",
-              "DocumentMoniker": "C:\\Users\\maksr\\Documents\\C# programms\\2D-shooter\\Shooter2D\\Game1.cs",
+              "DocumentMoniker": "C:\\Users\\maksr\\Documents\\C# progs\\Monogame\\Shooter2D\\Shooter2D\\Game1.cs",
               "RelativeDocumentMoniker": "Shooter2D\\Game1.cs",
-              "ToolTip": "C:\\Users\\maksr\\Documents\\C# programms\\2D-shooter\\Shooter2D\\Game1.cs",
+              "ToolTip": "C:\\Users\\maksr\\Documents\\C# progs\\Monogame\\Shooter2D\\Shooter2D\\Game1.cs",
               "RelativeToolTip": "Shooter2D\\Game1.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAQwDYAAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAowDsAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-05T10:50:09.522Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-05T10:50:09.522Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 111,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             }
           ]
         }
