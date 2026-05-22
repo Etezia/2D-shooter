@@ -61,6 +61,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/floor-dummy1.png
 
+#begin Sprites/MenuButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/MenuButton.png
+
 #begin Sprites/soldier_player_dummy.png
 /importer:TextureImporter
 /processor:TextureProcessor

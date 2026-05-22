@@ -17,6 +17,6 @@ public interface ICollider
 	public float Right { get; }
 	public float Bottom { get; }
 
-	public void SetCollidingObjects(List<object> objects);
+	public void SetCollidingObjects(IEnumerable<object> objects);
 	public bool HasCollisions(Vector2 position);
 }

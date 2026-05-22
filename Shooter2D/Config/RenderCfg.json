@@ -10,9 +10,9 @@
     },
 
     "Graphics" : {
-        "Screen-resolution" : {
-            "W" : 1280,
-            "H" : 720
+        "ScreenResolution" : {
+            "Width" : 1280,
+            "Height" : 720
         }
     }
 }

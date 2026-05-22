@@ -19,7 +19,7 @@ namespace Object_components
 		public float Right { get => X + Width; }
 		public float Bottom { get => Y + Height; }
 
-		private List<object> collidingObjects = new List<object>();
+		private IEnumerable<object> collidingObjects = new List<object>();
 
 		public RectCollider(float width, float height, float x = 0, float y = 0)
 		{
@@ -29,7 +29,7 @@ namespace Object_components
 			Y = y;
 		}
 
-		public void SetCollidingObjects(List<object> objects)
+		public void SetCollidingObjects(IEnumerable<object> objects)
 		{
 			collidingObjects = objects;
 		}

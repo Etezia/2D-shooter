@@ -14,11 +14,23 @@ public record Transform2D(Vector2 position, float rotation,
 	[Description("Order of object processing. Takes values from 0 to 1. 0 means higher priority.")]
 	public float Layer { get; private set; } = Math.Max(0, Math.Min(layer, 1));
 	
-	public void SetPosition(Vector2 position) => Position = position;
+	public void SetPosition(Vector2 position)
+	{
+		Position = position;
+		OnPositionReassigned?.Invoke();
+	}
 
 	public void SetRotation(float quaternion) => Rotation = quaternion;
 
-	public void SetScale(Point scale) => Scale = scale;	 
+	public void SetScale(Point scale) => Scale = scale;
+
+	public Rectangle ToRectangle() =>
+		new Rectangle((int)Position.X, (int)Position.Y, Scale.X, Scale.Y);
+
+	public Rectangle ToRectangleWithOffset(int xOffset, int yOffset) =>
+		new Rectangle((int)Position.X + xOffset, (int)Position.Y + yOffset, Scale.X, Scale.Y);
+
+	public event Action OnPositionReassigned; 
 }
 
 //Not implemented:

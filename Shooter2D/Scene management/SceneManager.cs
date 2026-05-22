@@ -17,14 +17,22 @@ internal static class SceneManager
 	private static ContentManager contentManager;
 	private static GameWindow gameWindow;
 
+	private static int WindowWidth;
+	private static int WindowHeight;
+
 	public static int CurrSceneId { get; private set; } = 0;
 
+	private static MainMenuScene mainMenuScene;
 	private static LevelScene mainScene;
 
 	public static void Initialize(ContentManager content, GameWindow window, Player player = null)
 	{
 		contentManager = content;
 		gameWindow = window;
+		WindowWidth = gameWindow.ClientBounds.Width;
+		WindowHeight = gameWindow.ClientBounds.Height;
+
+		mainMenuScene = new MainMenuScene(content);
 
 		mainScene = new LevelScene(content);
 		if (player != null) 
@@ -35,32 +43,36 @@ internal static class SceneManager
 
 	private static void AddScenesToList()
 	{
+		scenes.Add(mainMenuScene);
 		scenes.Add(mainScene);
 	}
 
 	public static void Update(GameTime gameTime)
 	{
-		var a = scenes[CurrSceneId];
-		//a.GetHashCode();
-		a.Update(gameTime);
+		lock (scenes[CurrSceneId])
+		{
+			var a = scenes[CurrSceneId];
+			a.Update(gameTime);
+		}
 	}
 
-	public static void Draw(SpriteBatch spriteBatch) =>
-		scenes[CurrSceneId].Draw(spriteBatch);
+	public static void Draw(SpriteBatch spriteBatch)
+	{
+		lock (scenes[CurrSceneId])
+		{
+			scenes[CurrSceneId].Draw(spriteBatch);
+		}
+	}
 
 	public static void AddPlayerOnScene(this LevelScene scene, Player player)
 	{
 		player.Collider.SetCollidingObjects(scene.GameObjectDict[typeof(ICollidingObject)]);
 		scene.GameObjects.Add(player);
-		scene.ObjectPhysics.SetVelocity(new Vector2(player.VelX, player.VelY));
+		scene.MainCamera.ObjectPhysics.SetVelocity(new Vector2(player.VelX, player.VelY));
 
-		InputManager.OnKeyUp +=
-			() => scene.ObjectPhysics.Translate(InputManager.DownVector, scene.Transform);
-		InputManager.OnKeyDown +=
-			() => scene.ObjectPhysics.Translate(InputManager.UpVector, scene.Transform);
-		InputManager.OnKeyLeft +=
-			() => scene.ObjectPhysics.Translate(InputManager.RightVector, scene.Transform);
-		InputManager.OnKeyRight +=
-			() => scene.ObjectPhysics.Translate(InputManager.LeftVector, scene.Transform);
+		player.Transform.OnPositionReassigned +=
+			() => scene.MainCamera.Transform
+				.SetPosition(-player.Transform.Position + 
+				new Vector2(WindowWidth / 2, WindowHeight / 2));
 	}
 }
