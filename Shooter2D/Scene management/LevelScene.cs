@@ -7,9 +7,12 @@ using Shooter2D.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using static Shooter2D.ConfigurationManager.Render;
+using static Shooter2D.LevelConfiguration;
+using static Shooter2D.LevelGenerator;
 
 namespace Shooter2D
 {
@@ -17,13 +20,10 @@ namespace Shooter2D
 	{
 		private Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
 
-		private const int CellSize = 64;
-		private const int initPosX = 0 * CellSize;
-		private const int initPosY = 0 * CellSize;
-		private CellState[,] levelMap;
-		
-		public Camera MainCamera { get; private set; }
+		private Player player;
+
 		public ContentManager GameContent { get; init; }
+		public Camera MainCamera { get; private set; }
 		public Dictionary<Type, HashSet<object>> GameObjectDict { get; private set; }
 			= new Dictionary<Type, HashSet<object>>()
 		{
@@ -34,18 +34,18 @@ namespace Shooter2D
 		};
 		public List<object> GameObjects { get; private set; } = new List<object>();
 
-		public LevelScene(ContentManager content)
+		public static event Action OnUpdate;
+
+		public LevelScene(ContentManager content, float xPos = 0, float yPos = 0)
 		{
 			GameContent = content;
 			MainCamera = new Camera(new Transform2D(Vector2.Zero, 0f, Point.Zero, 0));
-			levelMap = LevelGenerator.GenerateMap(5);
+			(MapCellsState, Point playerStartPos) = LevelGenerator.GenerateMapWithBSP();
+			MainCamera = new Camera(new Transform2D(new Vector2(xPos, yPos), 0f, Point.Zero, 0));
+
 			InitializeTextures();
 			ConvertMapToSprites();
-		}
-
-		public LevelScene(ContentManager content, float xPos, float yPos) : this(content)
-		{
-			MainCamera = new Camera(new Transform2D(new Vector2(xPos, yPos), 0f, Point.Zero, 0));
+			AddPlayerOnScene(playerStartPos);
 		}
 
 		private void InitializeTextures()
@@ -55,47 +55,53 @@ namespace Shooter2D
 			textures["Wall"] = GameContent.Load<Texture2D>("BrickWall1");
 			textures["Enemy"] = GameContent.Load<Texture2D>("enemy_dummy1");
 			textures["Floor"] = GameContent.Load<Texture2D>("floor-dummy1");
+			textures["Player"] = GameContent.Load<Texture2D>("dummy1");
+		}
+
+		private void AddPlayerOnScene(Point? startPos = null)
+		{
+			Vector2 startPosVector = new Vector2(SceneManager.WindowWidth / 2, SceneManager.WindowHeight / 2);
+			if (startPos != null)
+				startPosVector = new Vector2(startPos.Value.X * MapCellSize, startPos.Value.Y * MapCellSize);
+
+			player = new Player(textures["Player"],
+				new Transform2D(startPosVector, 0f, new Point(UnitSize, UnitSize), Layers.Player),
+				new RectCollider(UnitSize, UnitSize / 2, y: UnitSize / 2), 100);
+
+			player.Collider.SetCollidingObjects(GameObjectDict[typeof(ICollidingObject)]);
+			GameObjects.Add(player);
+			MainCamera.Transform.SetPosition(new Vector2(
+				SceneManager.WindowWidth / 2, SceneManager.WindowHeight / 2) - player.Transform.Position);
+			MainCamera.ObjectPhysics.SetVelocity(new Vector2(player.VelX, player.VelY));
+
+			player.Transform.OnPositionReassigned +=
+				() => MainCamera.Transform
+					.SetPosition(-player.Transform.Position +
+					new Vector2(SceneManager.WindowWidth / 2, SceneManager.WindowHeight / 2));
 		}
 
 		public void ConvertMapToSprites()
 		{
-			var width = levelMap.GetLength(0);
-			var height = levelMap.GetLength(1);
+			var width = MapCellsState.GetLength(0);
+			var height = MapCellsState.GetLength(1);
 
-			InputManager.OnLMBDown += () =>
-			{
-				lock (this)
-				{
-					Random rnd = new Random();
-
-					var currObj = new Obstacle(textures["Wall"],
-									new Transform2D(
-									new Vector2(rnd.Next(0, width) - initPosX, rnd.Next(0, height) - initPosY) * CellSize,
-									0f, new Point(CellSize, CellSize), Layers.Wall),
-									new RectCollider(CellSize, CellSize));
-
-					currObj.Collider
-								.SetCollidingObjects(GameObjectDict[typeof(ICollidingObject)]);
-					GameObjects.Add(currObj);
-					GameObjectDict[typeof(ICollidingObject)].Add(currObj);
-				}
-			};
+			AddSomeFunnyStuff(width, height);
 
 			for (var i = 0; i < width; i++) 
 				for (var j = 0; j < height; j++)
 				{
-					var currCell = levelMap[i, j];
+					var currCell = MapCellsState[i, j];
 
 					GameObjects.Add(new DecorativeEnvironment(textures["Floor"],
-						new Transform2D(new Vector2(i - initPosX, j - initPosY) * CellSize, 
-						0f, new Point(CellSize, CellSize), Layers.Floor)));
+						new Transform2D(new Vector2(i - InitLevelPosX, j - InitLevelPosY) * MapCellSize, 
+						0f, new Point(MapCellSize, MapCellSize), Layers.Floor)));
 
 					if (currCell == CellState.Wall)
 					{
 						var currObj = new Obstacle(textures["Wall"],
-								new Transform2D(new Vector2(i - initPosX, j - initPosY) * CellSize,
-								0f, new Point(CellSize, CellSize), Layers.Wall),
-								new RectCollider(CellSize, CellSize));
+								new Transform2D(new Vector2(i - InitLevelPosX, j - InitLevelPosY) * MapCellSize,
+								0f, new Point(MapCellSize, MapCellSize), Layers.Wall),
+								new RectCollider(MapCellSize, MapCellSize));
 
 						currObj.Collider
 							.SetCollidingObjects(GameObjectDict[typeof(ICollidingObject)]);
@@ -105,9 +111,9 @@ namespace Shooter2D
 					else if (currCell == CellState.Enemy)
 					{
 						var currObj = new Enemy(textures["Enemy"],
-								new Transform2D(new Vector2(i - initPosX, j - initPosY) * CellSize,
-								0f, new Point(CellSize, CellSize), Layers.Enemy),
-								new RectCollider(CellSize, CellSize), 200);
+								new Transform2D(new Vector2(i - InitLevelPosX, j - InitLevelPosY) * MapCellSize,
+								0f, new Point(UnitSize, UnitSize), Layers.Enemy),
+								new RectCollider(UnitSize, UnitSize / 2, y : UnitSize / 2), 200);
 
 						currObj.Collider
 							.SetCollidingObjects(GameObjectDict[typeof(ICollidingObject)]);
@@ -116,6 +122,23 @@ namespace Shooter2D
 				}
 
 			SetTypeToObjAccordance();
+		}
+
+		private void AddSomeFunnyStuff(int width, int height)
+		{
+			InputManager.OnLMBDown += () =>
+			{
+				lock (this)
+				{
+					Random rnd = new Random();
+
+					AddEntityOnScene(new Obstacle(textures["Wall"],
+							new Transform2D(
+							new Vector2(rnd.Next(0, width) - InitLevelPosX, rnd.Next(0, height) - InitLevelPosY) * MapCellSize,
+							0f, new Point(MapCellSize, MapCellSize), Layers.Wall),
+							new RectCollider(MapCellSize, MapCellSize)));
+				}
+			};
 		}
 
 		private void SetTypeToObjAccordance()
@@ -142,14 +165,15 @@ namespace Shooter2D
 					RemoveEntityFromScene(obj);
 				}
 			}
+
+			OnUpdate?.Invoke();
 		}
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
 			var cameraX = (int)MainCamera.Transform.Position.X;
 			var cameraY = (int)MainCamera.Transform.Position.Y;
-			spriteBatch.Begin(sortMode: SpriteSortMode.BackToFront, 
-				samplerState: SamplerState.PointWrap);
+			spriteBatch.Begin(sortMode: SpriteSortMode.BackToFront);
 
 			foreach (ISprite sprite in GameObjects)
 			{
@@ -162,7 +186,24 @@ namespace Shooter2D
 			spriteBatch.End();
 		}
 
-		public void RemoveEntityFromScene(object entity)
+		private void AddEntityOnScene(object entity)
+		{
+			GameObjects.Add(entity);
+
+			if (entity is ISprite)
+				GameObjectDict[typeof(ISprite)].Add(entity);
+			if (entity is ICollidingObject)
+			{
+				GameObjectDict[typeof(ICollidingObject)].Add(entity);
+				(entity as ICollidingObject).Collider.SetCollidingObjects(GameObjectDict[typeof(ICollidingObject)]);
+			}
+			if (entity is IDynamicObject)
+				GameObjectDict[typeof(IDynamicObject)].Add(entity);
+			if (entity is IDamageableObject)
+				GameObjectDict[typeof(IDamageableObject)].Add(entity);
+		}
+
+		private void RemoveEntityFromScene(object entity)
 		{
 			foreach (var gameObj in GameObjectDict)
 			{

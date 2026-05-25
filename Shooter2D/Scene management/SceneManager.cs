@@ -13,66 +13,56 @@ namespace Shooter2D;
 
 internal static class SceneManager
 {
+	public static bool IsGodModeOn = false;
+
 	private static List<IScene> scenes = new List<IScene>();
+	private static List<Func<IScene>> sceneLoaders = new List<Func<IScene>>()
+	{
+		() => new MainMenuScene(contentManager),
+		() => new LevelScene(contentManager)
+	};
 	private static ContentManager contentManager;
 	private static GameWindow gameWindow;
+	public static int WindowWidth => gameWindow.ClientBounds.Width;
+	public static int WindowHeight => gameWindow.ClientBounds.Height;
 
-	private static int WindowWidth;
-	private static int WindowHeight;
+	private static int currSceneId;
+	public static int CurrSceneId {
+		get { return currSceneId; }
+		set {
+			if (value >= sceneLoaders.Count)
+				throw new IndexOutOfRangeException("Scene with this index doesn't exist");
 
-	public static int CurrSceneId { get; private set; } = 0;
-
-	private static MainMenuScene mainMenuScene;
-	private static LevelScene mainScene;
-
-	public static void Initialize(ContentManager content, GameWindow window, Player player = null)
-	{
-		contentManager = content;
-		gameWindow = window;
-		WindowWidth = gameWindow.ClientBounds.Width;
-		WindowHeight = gameWindow.ClientBounds.Height;
-
-		mainMenuScene = new MainMenuScene(content);
-
-		mainScene = new LevelScene(content);
-		if (player != null) 
-			mainScene.AddPlayerOnScene(player);
-
-		AddScenesToList();
+			currSceneId = value;
+			currScene = sceneLoaders[value]();
+		}
 	}
 
-	private static void AddScenesToList()
+	public static IScene currScene { get; private set; }
+
+	public static void Initialize(ContentManager content, GameWindow window, int initialSceneId)
 	{
-		scenes.Add(mainMenuScene);
-		scenes.Add(mainScene);
+		if (sceneLoaders.Count == 0)
+			throw new ContentLoadException("No scene to load");
+
+		contentManager = content;
+		gameWindow = window;
+		CurrSceneId = initialSceneId;
 	}
 
 	public static void Update(GameTime gameTime)
 	{
-		lock (scenes[CurrSceneId])
+		lock (currScene)
 		{
-			var a = scenes[CurrSceneId];
-			a.Update(gameTime);
+			currScene.Update(gameTime);
 		}
 	}
 
 	public static void Draw(SpriteBatch spriteBatch)
 	{
-		lock (scenes[CurrSceneId])
+		lock (currScene)
 		{
-			scenes[CurrSceneId].Draw(spriteBatch);
+			currScene.Draw(spriteBatch);
 		}
-	}
-
-	public static void AddPlayerOnScene(this LevelScene scene, Player player)
-	{
-		player.Collider.SetCollidingObjects(scene.GameObjectDict[typeof(ICollidingObject)]);
-		scene.GameObjects.Add(player);
-		scene.MainCamera.ObjectPhysics.SetVelocity(new Vector2(player.VelX, player.VelY));
-
-		player.Transform.OnPositionReassigned +=
-			() => scene.MainCamera.Transform
-				.SetPosition(-player.Transform.Position + 
-				new Vector2(WindowWidth / 2, WindowHeight / 2));
 	}
 }

@@ -14,11 +14,17 @@ public record Physics (Vector2 velocity, ICollider collider = null)
 
 	public void SetVelocity(Vector2 velocity) => Velocity = velocity;
 
-	public void Translate(Vector2 vector, Transform2D transform)
+	public bool TryTranslatePhysically(Vector2 vector, Transform2D transform)
 	{
-		if (collider == null || !collider.HasCollisions(transform.Position + vector * velocity))
+		var isPossibleToMove =
+			collider == null || !collider.HasCollisions(transform.Position + vector * velocity);
+		if (isPossibleToMove)
 			transform.SetPosition(transform.Position + vector * Velocity);
+		return isPossibleToMove;
 	}
+	
+	public void Translate(Vector2 vector, Transform2D transform) =>
+		transform.SetPosition(transform.Position + vector * Velocity);
 
 	public void Rotate(float angle, Transform2D transform) =>
 		transform.SetRotation(transform.Rotation + angle);

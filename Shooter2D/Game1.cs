@@ -13,9 +13,8 @@ namespace Shooter2D
 		private GraphicsDeviceManager graphics;
 		private SpriteBatch spriteBatch;
 		private const int DeltaTimeMS = 40;
-		
-		private Player player;
-		private ISprite floor;
+
+		private const int InitialSceneId = 1;
 
 		private readonly Thread inputThread = 
 			new Thread(() => new InputManager().Update(25));
@@ -29,7 +28,6 @@ namespace Shooter2D
 
 		protected override void Initialize()
 		{
-			graphics.IsFullScreen = false;
 			graphics.PreferredBackBufferWidth = 1280;
 			graphics.PreferredBackBufferHeight = 720;
 			graphics.ApplyChanges();
@@ -55,11 +53,7 @@ namespace Shooter2D
 
 			Content.RootDirectory = "Content/Sprites";
 
-			player = new Player(Content.Load<Texture2D>("dummy1"),
-				new Transform2D(new Vector2(windowWidth / 2, windowHeight / 2), 
-				0f, new Point(50, 50), Layers.Player), new RectCollider(50, 25, y: 25), 100);
-
-			SceneManager.Initialize(Content, Window, player);
+			SceneManager.Initialize(Content, Window, InitialSceneId);
 
 			TargetElapsedTime = new System.TimeSpan(0, 0, 0, 0, 1000 / DeltaTimeMS);
 		}

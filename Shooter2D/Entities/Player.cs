@@ -13,8 +13,8 @@ namespace Shooter2D
 {
 	internal class Player : ISprite, IDynamicObject, IDamageableObject
 	{
-		public readonly float VelX = 5f;
-		public readonly float VelY = 5f;
+		public readonly float VelX = 15f;
+		public readonly float VelY = 15f;
 
 		public Transform2D Transform { get; private set; }
 		public Texture2D Texture { get; private set; }
@@ -36,14 +36,22 @@ namespace Shooter2D
 
 		private void SetDescriptions()
 		{
+			var move = (Vector2 vector) =>
+			{
+				if (SceneManager.IsGodModeOn)
+					ObjectPhysics.Translate(vector, Transform);
+				else
+					ObjectPhysics.TryTranslatePhysically(vector, Transform);
+			};
+
 			InputManager.OnKeyUp +=
-				() => ObjectPhysics.Translate(InputManager.UpVector, Transform);
+				() => move(UpVector);
 			InputManager.OnKeyDown +=
-				() => ObjectPhysics.Translate(InputManager.DownVector, Transform);
+				() => move(DownVector);
 			InputManager.OnKeyLeft +=
-				() => ObjectPhysics.Translate(InputManager.LeftVector, Transform);
+				() => move(LeftVector);
 			InputManager.OnKeyRight +=
-				() => ObjectPhysics.Translate(InputManager.RightVector, Transform);
-		}
+				() => move(RightVector);
+	}
 	}
 }
