@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework;
 using Object_components;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,18 +13,20 @@ namespace Shooter2D;
 
 internal static class LevelGenerator
 {
-	private const int MapWidth = 65;
-	private const int MapHeight = 55;
+	private const int MapWidth = 90;
+	private const int MapHeight = 80;
 
-	private const int MinRoomWidth = 6;
+	private const int MinRoomWidth = 5;
 	private const int MinRoomHeight = 5;
 	private const int MinRoomOffset = 3;
-	private const int MaxRoomOffset = 5;
-	private const float SplittingRandomOffset = 0.55f;
+	private const int MaxRoomOffset = 4;
+	private const float SplittingRandomOffset = 0.75f;
 
-	private const int IterationsCount = 3;
+	[Description("Increasing chances of pave passing")]
+	private const int PavePassingCoeff = 6;
+	private const int IterationsCount = 4;
 
-	private const float EnemySpawnChance = 0.15f;
+	private const float EnemySpawnChance = 0.09f;
 
 	private class BSPNode
 	{
@@ -66,6 +70,8 @@ internal static class LevelGenerator
 
 		public RoomType Type { get; set; }
 
+		public readonly HashSet<int> ConnectedRoomsId = new HashSet<int>();
+
 		public Room(Rectangle placementInfo, RoomType type)
 		{
 			this.placementInfo = placementInfo;
@@ -73,42 +79,49 @@ internal static class LevelGenerator
 		}
 	}
 
-	public static (CellState[,] map, Point playerPos) GenerateMapWithBSP()
+	public static (CellState[,] levelMap, CellState[,] entityMap, Point playerPos) GenerateMapWithBSP()
 	{
-		var result = new CellState[MapWidth, MapHeight];
+		var environmentMap = new CellState[MapWidth, MapHeight];
+		var entityMap = new CellState[MapWidth, MapHeight];
 		var rooms = new List<Room>();
 		var headNode = new BSPNode(0, 0, MapWidth - MinRoomOffset - 1, MapHeight - MinRoomOffset - 1);
 
 		SplitBSPNode(headNode, IterationsCount);
 		CreateRooms(headNode, rooms);
-		ApplyRoomsForMap(rooms, result);
+		ApplyRoomsForMap(rooms, environmentMap);
 
 		var playerRoom = rooms[new Random().Next(0, rooms.Count)];
 		playerRoom.Type = RoomType.PlayerRoom;
 		foreach (var room in rooms)
 		{
 			if (room.Type == RoomType.EnemyRoom)
-				GenerateEnemiesInRoom(result, room.Left, room.Right, room.Top, room.Bottom);
+				GenerateEnemiesInRoom(entityMap, room.Left, room.Right, room.Top, room.Bottom);
 		}
 
 		var count = rooms.Count;
-		for (var i = 1; i < count; i++)
-			PaveCorridorBetweenTwoRoads(rooms[i - 1], rooms[i], result);
-		for (var i = 2; i < count; i += 2)
-			PaveCorridorBetweenTwoRoads(rooms[i - 2], rooms[i], result);
 
-		return (result, playerRoom.Center);
+		for (var i = 0; i < count; i++)
+			for (var j = i + 1; j < count; j += BSPNode.Rng.Next(0, PavePassingCoeff) / 3)
+			{
+				//if (!rooms[i].ConnectedRoomsId.Contains(j) && !rooms[j].ConnectedRoomsId.Contains(i))
+				PaveCorridorBetweenTwoRoads(rooms[i], rooms[j], environmentMap, i, j);
+			}
+
+		return (environmentMap, entityMap, playerRoom.Center);
 	}
 
 	private static void SplitBSPNode(BSPNode node, int iterationsLeft)
 	{
-		if (node.Width / 4 <= MinRoomWidth && node.Height / 4 <= MinRoomHeight || iterationsLeft <= 0)
+		if (iterationsLeft <= 0)
 			return;
 
 		if (node.Height >= node.Width)
 		{
 			var splitRatio = (int)Math.Round(
 				(float)(node.Height / 2) * SplittingRandomOffset * (-0.5 + BSPNode.Rng.NextSingle()));
+			if (Math.Min(node.Height / 2 - splitRatio, node.Height / 2 + splitRatio) - 2 * MinRoomOffset <= MinRoomHeight)
+				return;
+
 			node.LeftNode = new BSPNode(node.Left, node.Top, node.Right, node.Bottom - node.Height / 2 - splitRatio - 1);
 			node.RightNode = new BSPNode(node.Left, node.Bottom - node.Height / 2 - splitRatio, node.Right, node.Bottom);
 		}
@@ -116,6 +129,9 @@ internal static class LevelGenerator
 		{
 			var splitRatio = (int)Math.Round(
 				(float)(node.Width / 2) * SplittingRandomOffset * (-0.5 + BSPNode.Rng.NextSingle()));
+			if (Math.Min(node.Width / 2 - splitRatio, node.Width / 2 + splitRatio) - 2 * MinRoomOffset <= MinRoomWidth)
+				return;
+
 			node.LeftNode = new BSPNode(node.Left, node.Top, node.Right - node.Width / 2 - splitRatio - 1, node.Bottom);
 			node.RightNode = new BSPNode(node.Right - node.Width / 2 - splitRatio, node.Top, node.Right, node.Bottom);
 		}
@@ -130,9 +146,7 @@ internal static class LevelGenerator
 
 		if (node.LeftNode == null && node.RightNode == null)
 		{
-			var room = node.ToRoom(RoomType.EnemyRoom);
-			if (room.Width >= MinRoomWidth && room.Height >= MinRoomHeight)
-				rooms.Add(room);
+			rooms.Add(node.ToRoom(RoomType.EnemyRoom));
 		}
 		else
 		{
@@ -146,45 +160,86 @@ internal static class LevelGenerator
 		foreach (var room in rooms)
 		{
 			for (var i = room.Left; i <= room.Right; i++)
-			{
-				map[i, room.Top] = CellState.Wall;
-				map[i, room.Bottom] = CellState.Wall;
-			}
-
-			for (var i = room.Top; i <= room.Bottom; i++)
-			{
-				map[room.Left, i] = CellState.Wall;
-				map[room.Right, i] = CellState.Wall;
-			}
+				for (var j = room.Top; j <= room.Bottom; j++)
+				{
+					if (i == room.Left || i == room.Right)
+					{
+						map[i, j] = CellState.Wall;
+						map[i, j] = CellState.Wall;
+					}
+					else if (j == room.Top || j == room.Bottom)
+					{
+						map[i, j] = CellState.Wall;
+						map[i, j] = CellState.Wall;
+					}
+					else
+					{
+						map[i, j] = CellState.Floor;
+					}
+				}
 		}
 	}
 
-	private static void PaveCorridorBetweenTwoRoads(Room room1, Room room2, CellState[,] map)
+	private static void PaveCorridorBetweenTwoRoads(
+		Room room1, Room room2, CellState[,] map, int fRoomId, int sRoomId)
 	{
-		var systemCenterPoint = (room1.Center + room2.Center) / new Point(2, 2);
-
 		if (room1.Right - 1 > room2.Left && room1.Left + 1 < room2.Right)
 		{
+			var deb = Math.Max(room1.Top, room2.Top) - Math.Min(room1.Bottom, room2.Bottom);
+			if (deb
+			> MaxRoomOffset * 2 + MinRoomHeight)
+				return;
+
 			var xCenter = (Math.Max(room1.Left, room2.Left) + Math.Min(room1.Right, room2.Right)) / 2;
 			var bottomSide = Math.Max(room1.Top, room2.Top);
 			for (var i = Math.Min(room1.Bottom, room2.Bottom); i <= bottomSide; i++)
 			{
+				if (i != Math.Min(room1.Bottom, room2.Bottom) && map[xCenter, i] == CellState.Wall
+					&& i != bottomSide)
+				{
+					map[xCenter, i] = CellState.Floor;
+					if (map[xCenter - 1, i] == CellState.Empty)
+						map[xCenter - 1, i] = CellState.Wall;
+					if (map[xCenter + 1, i] == CellState.Empty)
+						map[xCenter + 1, i] = CellState.Wall;
+					return;
+				}
+
 				map[xCenter + 1, i] = CellState.Wall;
 				map[xCenter - 1, i] = CellState.Wall;
-				map[xCenter, i] = CellState.Empty;
+				map[xCenter, i] = CellState.Floor;
 			}
 		}
 		else if (room1.Bottom - 1 > room2.Top && room1.Top + 1 < room2.Bottom)
 		{
+			var deb = Math.Max(room1.Left, room2.Left) - Math.Min(room1.Right, room2.Right);
+			if (deb
+			> MaxRoomOffset * 2 + MinRoomWidth)
+				return;
+
 			var yCenter = (Math.Max(room1.Top, room2.Top) + Math.Min(room1.Bottom, room2.Bottom)) / 2;
 			var rightSide = Math.Max(room1.Left, room2.Left);
 			for (var i = Math.Min(room1.Right, room2.Right); i <= rightSide; i++)
 			{
+				if (i != Math.Min(room1.Right, room2.Right) && map[i, yCenter] == CellState.Wall
+					&& i != rightSide)
+				{
+					map[i, yCenter] = CellState.Floor;
+					if (map[i, yCenter - 1] == CellState.Empty)
+						map[i, yCenter - 1] = CellState.Wall;
+					if (map[i, yCenter + 1] == CellState.Empty)
+						map[i, yCenter + 1] = CellState.Wall;
+					return;
+				}
+
 				map[i, yCenter + 1] = CellState.Wall;
 				map[i, yCenter - 1] = CellState.Wall;
-				map[i, yCenter] = CellState.Empty;
+				map[i, yCenter] = CellState.Floor;
 			}
 		}
+
+		room1.ConnectedRoomsId.Add(sRoomId);
+		room2.ConnectedRoomsId.Add(fRoomId);
 	}
 
 	public static void GenerateEnemiesInRoom(
@@ -224,6 +279,7 @@ internal static class LevelGenerator
 public enum CellState
 {
 	Empty,
+	Floor,
 	Wall,
 	Enemy
 }

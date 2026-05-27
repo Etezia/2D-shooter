@@ -74,7 +74,7 @@ namespace Shooter2D
 
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(Color.BurlyWood);
+			GraphicsDevice.Clear(Color.Black);
 			SceneManager.Draw(spriteBatch);
 			base.Draw(gameTime);
 		}

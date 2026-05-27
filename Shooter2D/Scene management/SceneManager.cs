@@ -13,7 +13,7 @@ namespace Shooter2D;
 
 internal static class SceneManager
 {
-	public static bool IsGodModeOn = false;
+	public static bool IsGodModeOn = true;
 
 	private static List<IScene> scenes = new List<IScene>();
 	private static List<Func<IScene>> sceneLoaders = new List<Func<IScene>>()

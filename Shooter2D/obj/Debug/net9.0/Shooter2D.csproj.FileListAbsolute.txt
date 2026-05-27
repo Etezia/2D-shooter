@@ -134,3 +134,5 @@ C:\Users\maksr\Documents\C# progs\Monogame\Shooter2D\Shooter2D\bin\Debug\net9.0\
 C:\Users\maksr\Documents\C# progs\Monogame\Shooter2D\Shooter2D\bin\Debug\net9.0\Config\RenderCfg.json
 C:\Users\maksr\Documents\C# progs\Monogame\Shooter2D\Shooter2D\bin\Debug\net9.0\Config\WeaponsCfg.json
 C:\Users\maksr\Documents\C# progs\Monogame\Shooter2D\Shooter2D\bin\Debug\net9.0\Content\Sprites\MenuButton.xnb
+C:\Users\maksr\Documents\C# progs\Monogame\Shooter2D\Shooter2D\bin\Debug\net9.0\Content\Sprites\bullet1.xnb
+C:\Users\maksr\Documents\C# progs\Monogame\Shooter2D\Shooter2D\bin\Debug\net9.0\Content\Sprites\riffle1.xnb

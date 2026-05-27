@@ -21,13 +21,14 @@ namespace Shooter2D
 		private Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
 
 		private Player player;
+		public Camera MainCamera { get; private set; }
 
 		public ContentManager GameContent { get; init; }
-		public Camera MainCamera { get; private set; }
+		private CellState[,] environmentMap;
+
 		public Dictionary<Type, HashSet<object>> GameObjectDict { get; private set; }
 			= new Dictionary<Type, HashSet<object>>()
 		{
-			{ typeof(ISprite), new HashSet<object>() },
 			{ typeof(ICollidingObject), new HashSet<object>() },
 			{ typeof(IDynamicObject), new HashSet<object>() },
 			{ typeof(IDamageableObject), new HashSet<object>() }
@@ -40,11 +41,13 @@ namespace Shooter2D
 		{
 			GameContent = content;
 			MainCamera = new Camera(new Transform2D(Vector2.Zero, 0f, Point.Zero, 0));
-			(MapCellsState, Point playerStartPos) = LevelGenerator.GenerateMapWithBSP();
+			(MapCellsState, CellState[,] entityMap, Point playerStartPos) = LevelGenerator.GenerateMapWithBSP();
 			MainCamera = new Camera(new Transform2D(new Vector2(xPos, yPos), 0f, Point.Zero, 0));
 
 			InitializeTextures();
-			ConvertMapToSprites();
+			ConvertMapToGameObjects(MapCellsState);
+			ConvertMapToGameObjects(entityMap);
+			SetTypeToObjAccordance();
 			AddPlayerOnScene(playerStartPos);
 		}
 
@@ -82,22 +85,22 @@ namespace Shooter2D
 					new Vector2(SceneManager.WindowWidth / 2, SceneManager.WindowHeight / 2));
 		}
 
-		public void ConvertMapToSprites()
+		public void ConvertMapToGameObjects(CellState[,] map)
 		{
-			var width = MapCellsState.GetLength(0);
-			var height = MapCellsState.GetLength(1);
-
-			AddSomeFunnyStuff(width, height);
+			var width = map.GetLength(0);
+			var height = map.GetLength(1);
 
 			for (var i = 0; i < width; i++) 
 				for (var j = 0; j < height; j++)
 				{
-					var currCell = MapCellsState[i, j];
+					var currCell = map[i, j];
 
-					GameObjects.Add(new DecorativeEnvironment(textures["Floor"],
-						new Transform2D(new Vector2(i - InitLevelPosX, j - InitLevelPosY) * MapCellSize, 
-						0f, new Point(MapCellSize, MapCellSize), Layers.Floor)));
-
+					if (currCell == CellState.Floor)
+					{
+						GameObjects.Add(new DecorativeEnvironment(textures["Floor"],
+							new Transform2D(new Vector2(i - InitLevelPosX, j - InitLevelPosY) * MapCellSize,
+							0f, new Point(MapCellSize, MapCellSize), Layers.Floor)));
+					}
 					if (currCell == CellState.Wall)
 					{
 						var currObj = new Obstacle(textures["Wall"],
@@ -122,8 +125,6 @@ namespace Shooter2D
 						GameObjects.Add(currObj);
 					}
 				}
-
-			SetTypeToObjAccordance();
 		}
 
 		private void AddSomeFunnyStuff(int width, int height)
@@ -147,8 +148,6 @@ namespace Shooter2D
 		{
 			foreach (var obj in GameObjects)
 			{
-				if (obj is ISprite)
-					GameObjectDict[typeof(ISprite)].Add(obj);
 				if (obj is ICollidingObject)
 					GameObjectDict[typeof(ICollidingObject)].Add(obj);
 				if (obj is IDynamicObject)
@@ -192,8 +191,6 @@ namespace Shooter2D
 		{
 			GameObjects.Add(entity);
 
-			if (entity is ISprite)
-				GameObjectDict[typeof(ISprite)].Add(entity);
 			if (entity is ICollidingObject)
 			{
 				GameObjectDict[typeof(ICollidingObject)].Add(entity);
