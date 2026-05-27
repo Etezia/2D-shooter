@@ -34,7 +34,7 @@ namespace Shooter2D
 		};
 		public List<object> GameObjects { get; private set; } = new List<object>();
 
-		public static event Action OnUpdate;
+		public static event Action<GameTime> OnUpdate;
 
 		public LevelScene(ContentManager content, float xPos = 0, float yPos = 0)
 		{
@@ -56,6 +56,8 @@ namespace Shooter2D
 			textures["Enemy"] = GameContent.Load<Texture2D>("enemy_dummy1");
 			textures["Floor"] = GameContent.Load<Texture2D>("floor-dummy1");
 			textures["Player"] = GameContent.Load<Texture2D>("dummy1");
+			textures["AK74M"] = GameContent.Load<Texture2D>("riffle1");
+			textures["RiffleBullet"] = GameContent.Load<Texture2D>("bullet1");
 		}
 
 		private void AddPlayerOnScene(Point? startPos = null)
@@ -166,7 +168,7 @@ namespace Shooter2D
 				}
 			}
 
-			OnUpdate?.Invoke();
+			OnUpdate?.Invoke(gameTime);
 		}
 
 		public void Draw(SpriteBatch spriteBatch)
