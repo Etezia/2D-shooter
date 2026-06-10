@@ -13,18 +13,18 @@ namespace Shooter2D;
 
 internal static class LevelGenerator
 {
-	private const int MapWidth = 90;
-	private const int MapHeight = 80;
+	private const int MapWidth = 40;
+	private const int MapHeight = 40;
 
-	private const int MinRoomWidth = 5;
-	private const int MinRoomHeight = 5;
-	private const int MinRoomOffset = 3;
-	private const int MaxRoomOffset = 4;
-	private const float SplittingRandomOffset = 0.75f;
+	private const int MinRoomWidth = 4;
+	private const int MinRoomHeight = 4;
+	private const int MinRoomOffset = 1;
+	private const int MaxRoomOffset = 1;
+	private const float SplittingRandomOffset = 0f;
 
 	[Description("Increasing chances of pave passing")]
-	private const int PavePassingCoeff = 6;
-	private const int IterationsCount = 4;
+	private const int PavePassingCoeff = 10;
+	private const int IterationsCount = 5;
 
 	private const float EnemySpawnChance = 0.09f;
 

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Shooter2D")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+01119e7c390a80460085e0c8b79a01533ff27f54")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+67b8a818fe75704c6cce5e33fbc29931e26fcb1f")]
 [assembly: System.Reflection.AssemblyProductAttribute("Shooter2D")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Shooter2D")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

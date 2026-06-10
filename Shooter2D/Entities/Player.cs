@@ -13,8 +13,8 @@ namespace Shooter2D
 {
 	internal class Player : ISprite, IDynamicObject, IDamageableObject
 	{
-		public readonly float VelX = 15f;
-		public readonly float VelY = 15f;
+		public const float VelX = 15f;
+		public const float VelY = 15f;
 
 		public Transform2D Transform { get; private set; }
 		public Texture2D Texture { get; private set; }
@@ -52,6 +52,6 @@ namespace Shooter2D
 				() => move(LeftVector);
 			InputManager.OnKeyRight +=
 				() => move(RightVector);
-	}
+		}
 	}
 }

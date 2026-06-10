@@ -77,7 +77,7 @@ namespace Shooter2D
 			GameObjects.Add(player);
 			MainCamera.Transform.SetPosition(new Vector2(
 				SceneManager.WindowWidth / 2, SceneManager.WindowHeight / 2) - player.Transform.Position);
-			MainCamera.ObjectPhysics.SetVelocity(new Vector2(player.VelX, player.VelY));
+			MainCamera.ObjectPhysics.SetVelocity(new Vector2(Player.VelX, Player.VelY));
 
 			player.Transform.OnPositionReassigned +=
 				() => MainCamera.Transform
